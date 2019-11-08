@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Quote from './components/quotes';
+import CategoryList from './components/categoryList'
 import './App.css';
 
 class App extends Component {
@@ -7,9 +8,9 @@ class App extends Component {
     category: "dev"
   }
 
-  changeCategory = () => {
+  changeCategory = (category) => {
     this.setState({
-        category: "sport"
+        category
     });
   };
 
@@ -19,12 +20,31 @@ class App extends Component {
       <div className="App">
           <Quote category ={category} />
           <br />
-          <button onClick={() => this.changeCategory()}>
-            Change Category
-          </button>
+          <CategoryList
+            activeCategory={category}
+            changeCategory={category => this.changeCategory(category)}
+          />          
       </div>
     );
   }
 }
 
 export default App;
+
+// changeCategory = (category) => {
+//   this.setState({
+//       category
+//   });
+// };
+
+// changeCategory = category => {
+//   this.setState({
+//       category
+//   });
+// };
+
+// changeCategory = () => {
+//   this.setState({
+//       category: "dev"
+//   });
+// };

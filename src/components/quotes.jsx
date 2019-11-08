@@ -13,6 +13,7 @@ class Quote extends Component {
         this.getQuote(); //call getQuote function
     }    
 
+    //lifecycle method
     componentDidUpdate(prevProps) {
         if (prevProps.category !== this.props.category) {
             this.getQuote();
