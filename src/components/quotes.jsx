@@ -10,19 +10,12 @@ class Quote extends Component {
 
     //lifecycle method
     async componentDidMount() {
-        this.getQuote(); //call getQuote function
+        const category = this.props.match.params.category_name;
+
+        this.getQuote(category); //call getQuote function
     }    
 
-    //lifecycle method
-    componentDidUpdate(prevProps) {
-        if (prevProps.category !== this.props.category) {
-            this.getQuote();
-        }
-    }
-
-    getQuote = async () => {
-        const { category } = this.props; //deconstruction
-
+    getQuote = async category => {
         const data = await loadData(
             `https://api.chucknorris.io/jokes/random?category=${category}`
         );
@@ -33,25 +26,17 @@ class Quote extends Component {
         })
     }
 
-    getCategory = async () => {
-        
-        const data = await loadData(
-            `https://api.chucknorris.io/jokes/categories`
-        );
-        const categories = data;
-            console.log(categories);
-    }
 
     handleClick = e => {
         e.preventDefault();
-        this.getQuote();
+        this.getQuote(this.props.match.params.category_name);
     };
 
 
     //render method
     render(){
         const { quote } = this.state; //deconstruction this. refers to the class we are in
-        const { category } = this.props;
+        const category = this.props.match.params.category_name;
         console.log(this.props.category);
         return (
             <>
